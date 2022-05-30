@@ -36,6 +36,7 @@ async function loadCompetitors(url){
   competitors.content.forEach(element => {
     let firstName = element.firstName;
     let lastName = element.lastName;
+    let age = element.age;
     let country = element.country.name;
     let team = element.team.name;
 
@@ -45,6 +46,7 @@ async function loadCompetitors(url){
       "<tr>" +
       "<td>" + firstName + "</td>" +
       "<td>" + lastName + "</td>" +
+      "<td>" + age + "</td>" +
       "<td>" + team + "</td>" +
       "<td>" + country + "</td>" +
       "<td><button class='btn btn-outline-secondary' style='z-index: 0.5' id='update-btn' onclick='updateCompetitor(" + json + ")'>Update</button></td>" +
