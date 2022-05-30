@@ -24,6 +24,22 @@ async function createCompetitor() {
   openModal();
 }
 
+async function updateCompetitor(competitor) {
+  setMethod("PUT");
+  setTitle("Update competitor");
+  setEntity("competitor");
+
+  setFormDestination("http://localhost:8080/api/competitors/" + competitor.id);
+  createInput("Firstname", "firstname", "firstName", "text", competitor.firstName);
+  createInput("Lastname", "lastname", "lastName", "text", competitor.lastName);
+  await createDropdownInput("http://localhost:8080/api/teams", "Team", "team", competitor.team.name);
+  await createDropdownInput("http://localhost:8080/api/countries", "Country", "country", competitor.country.name);
+
+  createFormEventListener();
+  showSubmitBtn();
+  openModal();
+}
+
 function showSubmitBtn() {
   let submitBtn = document.getElementById("submit");
   submitBtn.style.display = "";
@@ -33,12 +49,16 @@ function setEntity(e) {
   entity = e;
 }
 
+function setEntityId(id) {
+  entityId = id;
+}
+
 function setTitle(title) {
   modalTitle.textContent = title;
 }
 
-function setMethod(method) {
-  this.method = method;
+function setMethod(m) {
+  method = m;
 }
 
 function setFormDestination(action) {
@@ -66,7 +86,7 @@ function createInput(inputName, placeHolder, idName, type, value) {
   form.appendChild(input);
 }
 
-async function createDropdownInput(url, inputName, idName) {
+async function createDropdownInput(url, inputName, idName, selectName) {
   const title = document.createElement("p");
   const text = document.createTextNode(inputName);
   title.appendChild(text);
@@ -79,6 +99,11 @@ async function createDropdownInput(url, inputName, idName) {
   for (let i = 0; i < entities.length; i++) {
     let entity = entities[i];
     select.add(new Option(entity.name, entity.id));
+    if (selectName !== undefined) {
+      if (selectName === entity.name) {
+        select.selectedIndex = i;
+      }
+    }
   }
 
   form.appendChild(title);
@@ -114,25 +139,31 @@ function createFormEventListener() {
   form.addEventListener("submit", handleFormSubmit);
 }
 
+async function getTeamById(id) {
+  return await fetch("http://localhost:8080/api/teams/" + id).then(res => res.json());
+}
+
+async function getCountryById(id) {
+  return await fetch("http://localhost:8080/api/countries/" + id).then(res => res.json());
+}
+
 async function handleFormSubmit(event) {
   event.preventDefault();
 
   const form = event.currentTarget;
   const url = form.action;
 
+
   try {
     const formData = new FormData(form);
-
     let obj = {};
 
     switch (entity) {
       case "competitor" : {
         obj.firstName = formData.get("firstName");
         obj.lastName = formData.get("lastName");
-        obj.team = {};
-        obj.team.id = formData.get("team");
-        obj.country = {};
-        obj.country.id = formData.get("country");
+        obj.team = await getTeamById(formData.get("team"));
+        obj.country = await getCountryById(formData.get("country"));
       }
     }
 
@@ -142,10 +173,9 @@ async function handleFormSubmit(event) {
   }
 }
 
-
 async function postJson(url, json) {
   let fetchOptions = {
-    method: "POST",
+    method: method,
     headers: {
       "Content-Type": "application/json",
     },
