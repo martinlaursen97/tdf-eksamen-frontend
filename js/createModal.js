@@ -9,6 +9,7 @@ let method = "";
 let entity = "";
 const deleteButton = document.createElement("button");
 
+// Create modals
 async function createCompetitor() {
   setMethod("POST");
   setTitle("Create Competitor");
@@ -40,10 +41,10 @@ async function updateCompetitor(competitor) {
   openModal();
 }
 
+// Setup modals
 function setEntity(e) {
   entity = e;
 }
-
 
 function setTitle(title) {
   modalTitle.textContent = title;
@@ -127,6 +128,7 @@ async function fetchEntities(url) {
   return await fetch(url).then(response => response.json());
 }
 
+// Post modal form
 function createFormEventListener() {
   form.addEventListener("submit", handleFormSubmit);
 }

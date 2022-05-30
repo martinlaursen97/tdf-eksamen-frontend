@@ -18,6 +18,7 @@ function setParams() {
 }
 
 async function loadCompetitors(url){
+  // FindAll with pagination and sortBy
   let competitors = await fetch(url +
     "?page=" + getPage() +
     "&sortBy=" + getSortBy() +
@@ -25,13 +26,6 @@ async function loadCompetitors(url){
     .then(res => res.json());
 
   let table = document.getElementById("myTable");
-
-  // Remove all elements inside table
-  let child = table.lastElementChild;
-  while (child) {
-    table.removeChild(child);
-    child = table.lastElementChild;
-  }
 
   competitors.content.forEach(element => {
     let firstName = element.firstName;
@@ -58,6 +52,7 @@ async function loadCompetitors(url){
 }
 
 async function loadPageCountToPagination() {
+  // Returns a Page, with a totalPages variable
   const response = await fetch("http://localhost:8080/api/competitors")
     .then(res => res.json());
 

@@ -18,3 +18,14 @@
   cursor: pointer;
 }
 
+.canvas-container{
+  margin: 3% auto auto;
+  width: 70%;
+}
+
+#draw-btn {
+  line-height: 10px;
+  height: 28px;
+
+}
+

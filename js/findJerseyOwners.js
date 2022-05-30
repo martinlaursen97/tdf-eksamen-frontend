@@ -1,3 +1,5 @@
+// Displays the competitors with the jersey they own
+
 window.onload = async function display() {
   let yellowCard = document.getElementById("card-yellow");
   let greenCard = document.getElementById("card-green");
