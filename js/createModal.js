@@ -103,7 +103,6 @@ async function createDropdownInput(url, inputName, idName, selectName) {
   form.appendChild(select);
 }
 
-
 function openModal() {
   overlay.style.display = "block";
 }

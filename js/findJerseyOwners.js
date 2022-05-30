@@ -12,7 +12,7 @@ window.onload = async function display() {
   let whiteJersey = await getJerseyOwnerByJersey("WHITE");
 
   yellowCard.innerHTML = generateInnerHTMLString(yellowJersey) +
-    "Time: " + yellowJersey.unit + " min";
+    "Time: " + yellowJersey.unit.toFixed(1) + " min";
 
   greenCard.innerHTML = generateInnerHTMLString(greenJersey) +
     "Sprint points: " + greenJersey.unit;
@@ -21,7 +21,7 @@ window.onload = async function display() {
     "Mountain points: " + polkaJersey.unit;
 
   whiteCard.innerHTML = generateInnerHTMLString(whiteJersey) +
-    "Time: " + whiteJersey.unit + " min (<26)";
+    "Time: " + whiteJersey.unit.toFixed(1) + " min (<26)";
 }
 
 async function getJerseyOwnerByJersey(jersey) {

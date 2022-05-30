@@ -1,22 +1,3 @@
-window.onload = async function load() {
-  let url = "http://localhost:8080/api/competitors";
-  setParams();
-  await loadCompetitors(url);
-  await loadPageCountToPagination();
-}
-
-function setParams() {
-  if (getPage() === null) {
-    setPage(0);
-  }
-  if (getSortBy() === null) {z
-    setSortBy("id");
-  }
-  if (getSortDirection() === null) {
-    setSortDirection("ASC");
-  }
-}
-
 async function loadCompetitors(url){
   // FindAll with pagination and sortBy
   let competitors = await fetch(url +
@@ -51,6 +32,35 @@ async function loadCompetitors(url){
   })
 }
 
+async function loadCompetitorsByTime(url) {
+  // FindAll with pagination and sortBy
+  let competitors = await fetch(url)
+    .then(res => res.json());
+
+  let table = document.getElementById("myTable");
+
+  competitors.forEach(element => {
+    let firstName = element.competitor.firstName;
+    let lastName = element.competitor.lastName;
+    let age = element.competitor.age;
+    let country = element.competitor.country.name;
+    let team = element.competitor.team.name;
+    let bestTime = element.unit;
+
+    let row =
+      "<tr>" +
+      "<td>" + firstName + "</td>" +
+      "<td>" + lastName + "</td>" +
+      "<td>" + age + "</td>" +
+      "<td>" + team + "</td>" +
+      "<td>" + country + "</td>" +
+      "<td>" + bestTime + "</td>" +
+      "</tr>";
+
+    table.innerHTML += row;
+  })
+}
+
 async function loadPageCountToPagination() {
   // Returns a Page, with a totalPages variable
   const response = await fetch("http://localhost:8080/api/competitors")
@@ -75,6 +85,18 @@ async function loadPageCountToPagination() {
 
     li.appendChild(a);
     pagination.appendChild(li);
+  }
+}
+
+function setParams() {
+  if (getPage() === null) {
+    setPage(0);
+  }
+  if (getSortBy() === null) {z
+    setSortBy("id");
+  }
+  if (getSortDirection() === null) {
+    setSortDirection("ASC");
   }
 }
 
