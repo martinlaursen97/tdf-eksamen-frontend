@@ -16,6 +16,7 @@ async function createCompetitor() {
   setFormDestination("http://localhost:8080/api/competitors");
   createInput("Firstname", "firstname", "firstName", "text", "");
   createInput("Lastname", "lastname", "lastName", "text", "");
+  createInput("Age", "age", "age", "number", "");
   await createDropdownInput("http://localhost:8080/api/teams", "Team", "team");
   await createDropdownInput("http://localhost:8080/api/countries", "Country", "country");
 
@@ -31,6 +32,7 @@ async function updateCompetitor(competitor) {
   setFormDestination("http://localhost:8080/api/competitors/" + competitor.id);
   createInput("Firstname", "firstname", "firstName", "text", competitor.firstName);
   createInput("Lastname", "lastname", "lastName", "text", competitor.lastName);
+  createInput("Age", "age", "age", "number", competitor.age);
   await createDropdownInput("http://localhost:8080/api/teams", "Team", "team", competitor.team.name);
   await createDropdownInput("http://localhost:8080/api/countries", "Country", "country", competitor.country.name);
 
@@ -152,6 +154,7 @@ async function handleFormSubmit(event) {
       case "competitor" : {
         obj.firstName = formData.get("firstName");
         obj.lastName = formData.get("lastName");
+        obj.age = formData.get("age");
         obj.team = await getTeamById(formData.get("team"));
         obj.country = await getCountryById(formData.get("country"));
       }
