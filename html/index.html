@@ -23,13 +23,15 @@
     </div>
   </nav>
 
+  <button onclick="createCompetitor()" class="btn btn-outline-primary" style="margin:1%">Create competitor</button>
+
   <table class="table table-striped" style="margin-top: 3%">
     <thead >
     <tr>
-      <th scope="col">First name</th>
-      <th scope="col">Last name</th>
-      <th scope="col">Team</th>
-      <th scope="col">Country</th>
+      <th scope="col" class="table-title" onclick="setSortBy('firstName')">First name</th>
+      <th scope="col" class="table-title" onclick="setSortBy('lastName')">Last name</th>
+      <th scope="col" class="table-title" onclick="setSortBy('team.name')">Team</th>
+      <th scope="col" class="table-title" onclick="setSortBy('country.name')">Country</th>
       <th scope="col">Update</th>
       <th scope="col">Delete</th>
     </tr>
@@ -38,7 +40,13 @@
     </tbody>
   </table>
 
-  <button onclick="createCompetitor()">Create competitor</button>
+
+  <div class="body-container-centered">
+    <nav aria-label="Page navigation example">
+      <ul id="pagination" class="pagination">
+      </ul>
+    </nav>
+  </div>
 
   <div id="overlay">
     <div class="modal-content" style="max-width: 600px; margin: 5% auto auto;">
@@ -55,10 +63,5 @@
       </div>
     </div>
   </div>
-
-
-
-
-
 </body>
 </html>

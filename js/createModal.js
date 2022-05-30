@@ -20,7 +20,6 @@ async function createCompetitor() {
   await createDropdownInput("http://localhost:8080/api/countries", "Country", "country");
 
   createFormEventListener();
-  showSubmitBtn();
   openModal();
 }
 
@@ -36,22 +35,13 @@ async function updateCompetitor(competitor) {
   await createDropdownInput("http://localhost:8080/api/countries", "Country", "country", competitor.country.name);
 
   createFormEventListener();
-  showSubmitBtn();
   openModal();
-}
-
-function showSubmitBtn() {
-  let submitBtn = document.getElementById("submit");
-  submitBtn.style.display = "";
 }
 
 function setEntity(e) {
   entity = e;
 }
 
-function setEntityId(id) {
-  entityId = id;
-}
 
 function setTitle(title) {
   modalTitle.textContent = title;

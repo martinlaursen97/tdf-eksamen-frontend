@@ -1,7 +1,6 @@
 .body-container-centered {
-  width: 80%;
-  margin: 0 auto;
-  align-items: center;
+  display: flex;
+  justify-content: center;
 }
 
 #overlay {
@@ -13,5 +12,9 @@
   right: 0;
   z-index: 1;
   background-color: rgba(0, 0, 0, 0.5);
+}
+
+.table-title:hover {
+  cursor: pointer;
 }
 
