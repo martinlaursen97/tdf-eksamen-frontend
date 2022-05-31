@@ -54,7 +54,7 @@ async function loadCompetitorsByTime(url) {
       "<td>" + age + "</td>" +
       "<td>" + team + "</td>" +
       "<td>" + country + "</td>" +
-      "<td>" + bestTime + "</td>" +
+      "<td>" + bestTime.toFixed(2) + "</td>" +
       "</tr>";
 
     table.innerHTML += row;

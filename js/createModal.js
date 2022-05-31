@@ -62,6 +62,7 @@ function setFormDestination(action) {
 function createInput(inputName, placeHolder, idName, type, value) {
   const title = document.createElement("p");
   const text = document.createTextNode(inputName);
+  title.style.margin = "0 0 0px";
   title.appendChild(text);
 
   const input = document.createElement("input");
@@ -70,6 +71,8 @@ function createInput(inputName, placeHolder, idName, type, value) {
   input.type = type;
   input.placeholder = placeHolder;
   input.setAttribute("required", "");
+  input.style.width = "400px";
+  input.style.margin = "0 0 10px";
   if (value !== undefined) {
     input.value = value;
   }
@@ -82,10 +85,13 @@ function createInput(inputName, placeHolder, idName, type, value) {
 async function createDropdownInput(url, inputName, idName, selectName) {
   const title = document.createElement("p");
   const text = document.createTextNode(inputName);
+  title.style.margin = "0 0 0";
   title.appendChild(text);
 
   const entities = await fetchEntities(url);
   const select = document.createElement("select");
+  select.style.width = "400px";
+  select.style.margin = "0 0 10px";
   select.id = idName;
   select.name = idName;
 
